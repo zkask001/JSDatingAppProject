@@ -4,9 +4,9 @@
   "description": "Dating App",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm start", 
+    "client": "cd client && npm start",
     "test": "jest"
   },
   "author": "",
@@ -27,6 +27,7 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "babel-jest": "^29.7.0",
+    "concurrently": "^8.2.2",
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^24.0.0",
     "supertest": "^6.3.4"
