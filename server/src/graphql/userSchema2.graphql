@@ -1,0 +1,18 @@
+type User {
+  id: ID!
+  username: String!
+  age: Int!
+  bio: String
+  profileImage: String
+  matches: [User]
+}
+
+type Query {
+  getUser(id: ID!): User
+  getMatches(userId: ID!): [User]
+}
+
+type Mutation {
+  createUser(username: String!, age: Int!): User
+  likeUser(userId: ID!, likedUserId: ID!): Boolean
+}

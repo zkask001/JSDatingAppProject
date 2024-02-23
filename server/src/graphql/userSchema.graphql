@@ -1,0 +1,32 @@
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  password: String! # Note: This should be hashed and not stored as plaintext in a real app
+  profile: Profile!
+}
+
+type Profile {
+  name: String
+  age: Int
+  bio: String
+  profileImage: String
+}
+
+type Query {
+  getUser(id: ID!): User
+  getUsers: [User]
+}
+
+type Mutation {
+  registerUser(username: String!, email: String!, password: String!): User
+  loginUser(email: String!, password: String!): User
+  updateProfile(userId: ID!, profile: ProfileInput!): User
+}
+
+input ProfileInput {
+  name: String
+  age: Int
+  bio: String
+  profileImage: String
+}

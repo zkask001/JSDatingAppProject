@@ -1,0 +1,4 @@
+type Query {
+  getUserProfile(userId: ID!): Profile
+  getMatchingProfiles(userId: ID!): [Profile]
+}
