@@ -11,7 +11,13 @@ export const GET_USERS = gql`
         age
         bio
         profileImage
+        liked
       }
     }
+  }
+`;
+export const TOGGLE_LIKE = gql`
+  mutation ToggleLike($userId: ID!) {
+    toggleLike(userId: $userId)
   }
 `;

@@ -11,6 +11,7 @@ type Profile {
   age: Int
   bio: String
   profileImage: String
+  liked: Boolean # temporary liked feature (before potential user registration implemented)
 }
 
 type Query {
@@ -22,6 +23,7 @@ type Mutation {
   registerUser(username: String!, email: String!, password: String!): User
   loginUser(email: String!, password: String!): User
   updateProfile(userId: ID!, profile: ProfileInput!): User
+  toggleLike(userId: ID!): Boolean
 }
 
 input ProfileInput {
