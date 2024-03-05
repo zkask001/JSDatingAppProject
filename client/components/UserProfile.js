@@ -7,52 +7,45 @@ import { useRouter } from 'next/router';
 const UserProfile = ({ user }) => {
   const router = useRouter();
 
-  if (!user) {
-    return <p>No user found</p>;
-  }
-
   const [liked, setLiked] = useState(user.profile.liked);
 
   const [toggleLike] = useMutation(TOGGLE_LIKE, {
     variables: { userId: user.id },
     refetchQueries: [{ query: GET_USERS }],
+    onError: (error) => {
+      console.error('Mutation error:', error.message);
+    },
   });
 
   const handleLikeClick = async () => {
     try {
-      // Optimistic update
-      setLiked(!liked);
-
-      console.log('Toggling like optimistically...');
+      console.log('Toggling like...');
       await toggleLike();
       console.log('Like toggled successfully');
+      setLiked(!liked);
     } catch (error) {
       console.error('Error toggling like:', error.message);
-      // Revert local state on error
-      setLiked(liked);
     }
   };
 
-  const { username, email, profile } = user;
+  if (!user) {
+    return <p>No user found</p>;
+  }
 
-  const handleNavigateToLiked = () => {
-    router.push('/liked-profiles');
-  };
+  const { username, email, profile } = user;
 
   return (
     <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-      <div style={{ border: '1px solid #ccc', padding: '10px', maxWidth: '200px' }}>
+      <div style={{ border: '1px solid #ccc', padding: '10px', maxWidth: '300px' }}>
         <h2>{username}</h2>
         <p>Email: {email}</p>
         <h3>Profile</h3>
         <p>Name: {profile.name}</p>
         <p>Age: {profile.age}</p>
         <p>Bio: {profile.bio}</p>
-        <img src={profile.profileImage} alt="Profile" style={{ maxWidth: '100%' }} />
         <button
-          style={{ backgroundColor: liked ? 'green' : 'white' }}
+          style={{ backgroundColor: liked ? 'lime' : 'white' }}
           onClick={handleLikeClick}
-          disabled={false}
         >
           {liked ? 'Liked' : 'Like'}
         </button>

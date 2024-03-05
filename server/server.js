@@ -4,21 +4,21 @@ const fs = require('fs');
 const path = require('path');
 
 // Read the schemas from file
-const readSchema = (filename) => {
-  const filePath = path.join(__dirname, 'src', 'graphql', filename);
+const readSchema = (service, filename) => {
+  const filePath = path.join(__dirname, 'src', 'services', service, 'graphql', filename);
   return fs.readFileSync(filePath, 'utf-8');
 };
 
 const typeDefs = [
-  readSchema('userSchema.graphql'),
-  readSchema('profileSchema.graphql'),
-  readSchema('messagingSchema.graphql'),
+  readSchema('user', 'userSchema.graphql'),
+  readSchema('profile', 'profileSchema.graphql'),
+  readSchema('messaging', 'messagingSchema.graphql'),
 ];
 
 // Resolvers
-const userResolvers = require('./src/resolvers/userResolver');
-const profileResolvers = require('./src/resolvers/profileResolver');
-const messagingResolvers = require('./src/resolvers/messagingResolver');
+const userResolvers = require('./src/services/user/resolvers/userResolver');
+const profileResolvers = require('./src/services/profile/resolvers/profileResolver');
+const messagingResolvers = require('./src/services/messaging/resolvers/messagingResolver');
 
 // Create ApolloServer
 const server = new ApolloServer({
