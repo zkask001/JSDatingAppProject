@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { TOGGLE_LIKE } from '../graphql/queries';
 import { GET_USERS } from '../graphql/queries';
 import { useRouter } from 'next/router';
+import LikedProfileObserver from '../../server/src/observers/LikedProfileObserver';
 
 const UserProfile = ({ user }) => {
   const router = useRouter();
@@ -17,12 +18,21 @@ const UserProfile = ({ user }) => {
     },
   });
 
+  // LikedProfileObserver instance
+  const likedProfileObserver = new LikedProfileObserver();
+
   const handleLikeClick = async () => {
     try {
       console.log('Toggling like...');
       await toggleLike();
       console.log('Like toggled successfully');
+
+      // local state updated
       setLiked(!liked);
+
+      // observer notified after a successful like toggle
+      likedProfileObserver.update(user);
+      
     } catch (error) {
       console.error('Error toggling like:', error.message);
     }
