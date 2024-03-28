@@ -27,7 +27,6 @@ function MyApp({ Component, pageProps }) {
                   <a>Liked Profiles</a>
                 </Link>
               </li>
-              {/* Add more links as needed */}
             </ul>
           </nav>
           <Component {...pageProps} />

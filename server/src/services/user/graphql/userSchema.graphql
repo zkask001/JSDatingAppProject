@@ -2,7 +2,7 @@ type User {
   id: ID!
   username: String!
   email: String!
-  password: String! # Note: This should be hashed and not stored as plaintext in a real app
+  password: String!
   profile: Profile!
 }
 

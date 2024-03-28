@@ -1,7 +1,7 @@
 //handles queries and mutations related to user management
 
 
-// Mock user data (can be replaced with actual data source)
+// mock user data (will be replaced with actual data source)
 const users = [
     { id: '1', username: 'user1', email: 'user1@example.com', password: 'password1', profile: { name: 'User One', age: 25, bio: 'I love hiking', profileImage: 'image1.jpg', liked: false } },
     { id: '2', username: 'user2', email: 'user2@example.com', password: 'password2', profile: { name: 'User Two', age: 28, bio: 'Coffee enthusiast', profileImage: 'image2.jpg' }, liked: false },

@@ -19,7 +19,8 @@ const Home = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const users = data.getUsers || []; // ensure it's an array or default to an empty array
+  // users as an array
+  const users = data.getUsers || [];
 
   return (
     <div>
